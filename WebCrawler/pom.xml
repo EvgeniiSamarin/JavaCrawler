@@ -21,6 +21,43 @@
             <version>1.15.3</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.apache.lucene</groupId>
+            <artifactId>lucene-core</artifactId>
+            <version>9.5.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.lucene</groupId>
+            <artifactId>lucene-analyzers-common</artifactId>
+            <version>8.7.0</version>
+        </dependency>
+
+
+
+
+        <dependency>
+            <groupId>org.apache.lucene.morphology</groupId>
+            <artifactId>morph</artifactId>
+            <version>1.5</version>
+            <scope>system</scope>
+            <systemPath>/Users/evgeniysamarin/Desktop/morph-1.5.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.lucene.morphology</groupId>
+            <artifactId>dictionary-reader</artifactId>
+            <version>1.5</version>
+            <scope>system</scope>
+            <systemPath>/Users/evgeniysamarin/Desktop/dictionary-reader-1.5.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.lucene.morphology</groupId>
+            <artifactId>russian</artifactId>
+            <version>1.5</version>
+            <scope>system</scope>
+            <systemPath>/Users/evgeniysamarin/Desktop/russian-1.5.jar</systemPath>
+        </dependency>
+
     </dependencies>
 
 </project>
