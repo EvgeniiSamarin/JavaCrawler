@@ -47,10 +47,7 @@ public class ListEvaluator extends AbstractEvaluator<List<Integer>> {
             e.printStackTrace();
         }
         Set<Integer> res = InvertedIndexApplication.invertedIndex.get(lemma).keySet();
-        if(res != null) {
-            return Arrays.asList(res.toArray(new Integer[]{}));
-        }
-        else return new ArrayList<>();
+        return Arrays.asList(res.toArray(new Integer[]{}));
     }
 
     @Override
@@ -77,12 +74,7 @@ public class ListEvaluator extends AbstractEvaluator<List<Integer>> {
         } else {
             return super.evaluate(operator, operands, evaluationContext);
         }
-        result.sort(new Comparator<Integer>() {
-            @Override
-            public int compare(Integer o1, Integer o2) {
-                return o1 - o2;
-            }
-        });
+        result.sort(Comparator.comparingInt(o -> o));
         return result;
     }
 }

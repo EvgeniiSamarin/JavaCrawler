@@ -7,7 +7,9 @@ import org.apache.lucene.morphology.russian.RussianAnalyzer;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.*;
 
@@ -49,6 +51,7 @@ public class InvertedIndexApplication {
             File file = new File(i + ".html");
             indexFile(file);
         }
+        writeIndexToFile();
     }
 
     private static void indexFile(File file) throws IOException {
@@ -61,11 +64,7 @@ public class InvertedIndexApplication {
         while (stream.incrementToken()) {
             String lemma = stream.getAttribute(CharTermAttribute.class).toString();
             if(!lemma.matches("[0-9]+") && lemma.length() != 1) {
-                invertedIndex.computeIfAbsent(lemma, k -> new TreeMap<>(new Comparator<Integer>() {
-                    public int compare(Integer o1, Integer o2) {
-                        return o1 - o2;
-                    }
-                }));
+                invertedIndex.computeIfAbsent(lemma, k -> new TreeMap<>(Comparator.comparingInt(o -> o)));
                 invertedIndex.get(lemma).putIfAbsent(fileName, 0);
                 invertedIndex.get(lemma).put(fileName, invertedIndex.get(lemma).get(fileName) + 1);
             }
@@ -76,5 +75,16 @@ public class InvertedIndexApplication {
         docWords.put(fileName, countWords);
         stream.end();
         stream.close();
+    }
+
+    private static void writeIndexToFile() throws IOException {
+        BufferedWriter writer = new BufferedWriter(new FileWriter("invertedIndex.txt", true));
+        for(Map.Entry<String, Map<Integer, Integer>> entry : invertedIndex.entrySet()) {
+            writer.append(entry.getKey()).append(" ");
+            for (Map.Entry<Integer, Integer> keySet : entry.getValue().entrySet()) {
+                writer.append(keySet.getKey().toString()).append(" ");
+            }
+            writer.append("\n");
+        }
     }
 }
