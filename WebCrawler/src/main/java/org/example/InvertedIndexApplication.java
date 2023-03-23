@@ -16,6 +16,8 @@ import java.util.*;
 public class InvertedIndexApplication {
     protected static Map<String, Map<Integer, Integer>> invertedIndex = new HashMap<String, Map<Integer, Integer>>();
     protected static Map<Integer, Integer> docWords = new HashMap<>();
+    protected static Map<String, Double> wordIdfMap = new HashMap<>();
+    protected static Map<String, Map<Integer, Double>> tfIdfMap = new HashMap<>();
     protected static int docMaxNumber = 0;
     protected static int docCount = 0;
     protected static Analyzer analyzer;
